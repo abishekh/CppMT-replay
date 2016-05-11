@@ -38,7 +38,8 @@ using std::string;
 using std::stringstream;
 using std::vector;
 
-static Scalar draw_colour(255, 255, 255);
+static Scalar draw_colour(158, 83, 73);
+static Scalar draw_color_2(0,0,255);
 
 vector<float> get_next_line_tokens(istream& file_stream) {
   vector<float> tokens;
@@ -55,6 +56,7 @@ vector<float> get_next_line_tokens(istream& file_stream) {
 }
 
 void draw_bbox(Mat frame, vector<float> bbox) {
+int thickness=3;
   for(int i = 0; i < 4; i++) {
     int n = (i + 4) * 2;
     int m = (((i + 1) % 4) + 4) * 2;
@@ -62,14 +64,14 @@ void draw_bbox(Mat frame, vector<float> bbox) {
     Point pnt1(bbox[n], bbox[n + 1]);
     Point pnt2(bbox[m], bbox[m + 1]);
 
-    line(frame, pnt1, pnt2, draw_colour);
+    line(frame, pnt1, pnt2, draw_colour,thickness);
   }
 }
 
 void draw_bbox_centre(Mat frame, vector<float> bbox) {
   Point centre(bbox[3], bbox[4]);
 
-  circle(frame, centre, 2, draw_colour);
+  circle(frame, centre, 2, draw_colour_2,2);
 }
 
 string output_filename(string input_filename, string output_dir="") {
